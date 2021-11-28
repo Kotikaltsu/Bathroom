@@ -1,0 +1,3490 @@
+type: custom:button-card
+entity: sensor.lumi_lumi_weather_2ffa6104_temperature
+entity_picture: /local/dashboard_images/bathtub.png
+show_entity_picture: true
+name: Kylpyhuone
+show_state: true
+styles:
+  custom_fields:
+    graph:
+      - position: absolute
+      - left: 135px
+      - top: 40px
+      - width: 32px
+      - opacity: 75%
+    topleft:
+      - position: absolute
+      - left: 135px
+      - top: 10px
+      - width: 32px
+      - opacity: 100%
+    topright:
+      - position: absolute
+      - left: 48px
+      - top: 125px
+      - width: 62px
+      - opacity: 100%
+    topbottom:
+      - position: absolute
+      - left: 135px
+      - top: 70px
+      - width: 32px
+      - opacity: 100%
+  card:
+    - width: 173px
+    - height: 150px
+    - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)
+  grid:
+    - grid-template-areas: '"i" "n" "s"'
+    - grid-template-columns: 1fr
+    - grid-template-rows: 1fr min-content min-content
+  img_cell:
+    - align_self: start
+    - text_align: start
+  name:
+    - justify-self: null
+    - padding-left: 0px
+    - font-weight: bold
+    - text-transform: lovercase
+    - align-self: null
+    - padding-bottom: null
+    - font-size: 15.5px
+  state:
+    - justify-self: null
+    - padding-left: 0px
+    - font-weight: null
+    - text-transform: lovercase
+    - align-self: null
+    - padding-bottom: null
+    - font-size: 14px
+    - color: '#b3b3b3'
+    - opacity: 0%
+  color_type: card
+  layout: icon_name_state2nd
+  show_name: true
+  show_label: false
+  label: null
+state:
+  - value: 'on'
+    styles:
+      card:
+        - filter: grayscale(100%)
+        - animation: blink 3s ease infinite
+        - background-color: null
+        - color: null
+custom_fields:
+  topbottom:
+    card:
+      type: custom:button-card
+      entity: cover.bf5bcfc98acc0f6b6cvdl7
+      icon: mdi:blinds
+      tap_action:
+        action: call-service
+        service: automation.trigger
+        service_data:
+          entity_id: automation.shelly_kylpyhuone_blinds_open_close
+      show_state: false
+      show_name: false
+      show_label: false
+      styles:
+        grid:
+          - grid-template-areas: '"i s s"'
+          - grid-template-columns: 1fr
+          - grid-template-rows: 1fr min-content min-content
+        icon:
+          - width: 20px
+          - opacity: 40%
+        state:
+          - font-size: 10px
+          - justify-self: null
+          - padding-right: 12px
+          - font-weight: null
+          - text-transform: lovercase
+          - align-self: null
+          - padding-bottom: null
+      state:
+        - value: opening
+          icon: mdi:blinds-open
+        - operator: default
+          icon: mdi:blinds
+  graph:
+    card:
+      type: custom:button-card
+      entity: media_player.eteinen
+      entity_picture: /local/dashboard_images/loudspeaker.png
+      show_entity_picture: true
+      extra_styles: |
+        @keyframes pulse {
+          0% {
+            -moz-box-shadow: 0 0 0 0 rgba(255,0,0, 0);
+            box-shadow: 0 0 0 0 rgba(254,128,0,0.4);
+          }
+          70% {
+              -moz-box-shadow: 0 0 0 10px rrgba(240,52,52, 0.9);
+              box-shadow: 0 0 0 10px rgba(240,153,50,0);
+          }
+          100% {
+              -moz-box-shadow: 0 0 0 0 rgba(240,52,52, 0);
+              box-shadow: 0 0 0 0 rgba(240,153,50, 0);
+          }
+        }
+      tap_action:
+        action: more-info
+      state:
+        - value: unavailable
+          styles:
+            card:
+              - filter: grayscale(100%)
+              - opacity: 100%
+              - animation: ball-scale 2s ease-in-out infinite
+        - value: 'off'
+          styles:
+            card:
+              - filter: grayscale(100%)
+              - opacity: 100%
+        - value: idle
+          styles:
+            card:
+              - opacity: 100%
+        - value: playing
+          styles:
+            icon:
+              - animation: pulse 1.2s infinite
+            card:
+              - background-color: null
+              - color: null
+              - opacity: 100%
+      show_state: false
+      show_name: false
+      show_label: false
+      styles:
+        grid:
+          - grid-template-areas: '"i s s"'
+          - grid-template-columns: 1fr
+          - grid-template-rows: 1fr min-content min-content
+        icon:
+          - width: 20px
+        state:
+          - font-size: 10px
+          - justify-self: null
+          - padding-right: 12px
+          - font-weight: null
+          - text-transform: lovercase
+          - align-self: null
+          - padding-bottom: null
+  topright:
+    card:
+      type: custom:swipe-card
+      parameters:
+        centeredSlides: true
+        allowTouchMove: true
+        loop: false
+        spaceBetween: 8
+        slidesPerView: auto
+        pagination:
+          type: false
+        effect: fade
+        fadeEffect:
+          crossFade: true
+        autoplay:
+          disableOnInteraction: false
+          delay: 10000
+        speed: 2000
+      cards:
+        - type: horizontal-stack
+          cards:
+            - type: custom:button-card
+              entity: sensor.lumi_lumi_weather_2ffa6104_temperature
+              entity_picture: /local/dashboard_images/lamp.png
+              show_entity_picture: false
+              tap_action:
+                action: fire-dom-event
+                browser_mod:
+                  command: popup
+                  title: 'null'
+                  hide_header: true
+                  auto_close: false
+                  large: false
+                  style:
+                    $: |
+                      .mdc-dialog {
+                        backdrop-filter: blur(10px);
+                        background: rgba(0,0,0,0.5);
+                      }  
+                      .mdc-dialog .mdc-dialog__container .mdc-dialog__surface {
+                        border-radius: 10px;
+                      }
+                    .: |
+                      :host {
+                        --mdc-theme-surface: rgba(245,245,245,0.7);
+                        --secondary-background-color: rgb(0,0,0,0.5);                  
+                       }
+                      :host .content {
+                        width: 10vw;
+                        height: 85vh;
+                       }                                   
+                  card:
+                    type: vertical-stack
+                    cards:
+                      - type: custom:button-card
+                        color_type: black-card
+                        name: false
+                        styles:
+                          card:
+                            - width: 0px
+                            - height: 11px
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: blank-card
+                            name: false
+                            styles:
+                              card:
+                                - width: 27px
+                                - height: 10px
+                          - type: custom:button-card
+                            entity: 'null'
+                            icon: 'null'
+                            name: Sisäympäristö
+                            styles:
+                              card:
+                                - width: 310px
+                                - height: 50px
+                                - box-shadow: none
+                              grid:
+                                - grid-template-areas: '"i" "n" "s"'
+                                - grid-template-columns: 1fr
+                                - grid-template-rows: 1fr min-content min-content
+                              img_cell:
+                                - align_self: start
+                                - text_align: start
+                              name:
+                                - justify-self: null
+                                - padding-left: 0px
+                                - font-weight: bold
+                                - text-transform: lovercase
+                                - align-self: null
+                                - color: '#323232'
+                              color_type: card
+                              color: 'null'
+                              layout: icon_state_name2nd
+                              show_state: true
+                              show_name: true
+                              show_label: true
+                              label: null
+                              state:
+                                - value: 'on'
+                                  styles:
+                                    card:
+                                      - box-shadow: none
+                                      - opacity: 70%
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: blank-card
+                            name: false
+                            styles:
+                              card:
+                                - width: 27px
+                                - height: 10px
+                          - type: custom:button-card
+                            entity: 'null'
+                            name: Keskiarvo
+                            show_state: true
+                            show_icon: true
+                            styles:
+                              custom_fields:
+                                graph:
+                                  - position: absolute
+                                  - left: 3px
+                                  - top: 120px
+                                  - width: 50px
+                                  - opacity: 75%
+                                topleft:
+                                  - position: absolute
+                                  - left: 220px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                                topright:
+                                  - position: absolute
+                                  - left: 140px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                              card:
+                                - width: 310px
+                                - height: 50px
+                                - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)
+                              grid:
+                                - grid-template-areas: '"i" "n" "s"'
+                                - grid-template-columns: 1fr
+                                - grid-template-rows: 1fr min-content min-content
+                              img_cell:
+                                - align-self: start
+                                - text-align: start
+                              name:
+                                - justify-self: left
+                                - padding-left: 10px
+                                - font-weight: bold
+                                - text-transform: lovercase
+                                - align-self: null
+                              state:
+                                - justify-self: null
+                                - padding-left: 10px
+                                - color: '#b3b3b3'
+                              color_type: card
+                              layout: icon_name_state
+                              label: null
+                            custom_fields:
+                              topright:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.average_temperature_home
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/thermo1.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                              topleft:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.lumi_lumi_weather_6c0cdd01_humidity
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/humidity.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: blank-card
+                            name: false
+                            styles:
+                              card:
+                                - width: 27px
+                                - height: 10px
+                          - type: custom:button-card
+                            entity: 'null'
+                            name: Eteinen
+                            show_state: true
+                            show_icon: true
+                            styles:
+                              custom_fields:
+                                graph:
+                                  - position: absolute
+                                  - left: 3px
+                                  - top: 120px
+                                  - width: 50px
+                                  - opacity: 75%
+                                topleft:
+                                  - position: absolute
+                                  - left: 220px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                                topright:
+                                  - position: absolute
+                                  - left: 140px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                              card:
+                                - width: 310px
+                                - height: 50px
+                                - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)
+                              grid:
+                                - grid-template-areas: '"i" "n" "s"'
+                                - grid-template-columns: 1fr
+                                - grid-template-rows: 1fr min-content min-content
+                              img_cell:
+                                - align-self: start
+                                - text-align: start
+                              name:
+                                - justify-self: left
+                                - padding-left: 10px
+                                - font-weight: bold
+                                - text-transform: lovercase
+                                - align-self: null
+                              state:
+                                - justify-self: null
+                                - padding-left: 10px
+                                - color: '#b3b3b3'
+                              color_type: card
+                              layout: icon_name_state
+                              label: null
+                            custom_fields:
+                              topright:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.average_temperature_home
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/thermo1.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                              topleft:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.lumi_lumi_weather_6c0cdd01_humidity
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/humidity.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: blank-card
+                            name: false
+                            styles:
+                              card:
+                                - width: 27px
+                                - height: 10px
+                          - type: custom:button-card
+                            entity: 'null'
+                            name: Keittiö
+                            show_state: true
+                            show_icon: true
+                            styles:
+                              custom_fields:
+                                graph:
+                                  - position: absolute
+                                  - left: 3px
+                                  - top: 120px
+                                  - width: 50px
+                                  - opacity: 75%
+                                topleft:
+                                  - position: absolute
+                                  - left: 220px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                                topright:
+                                  - position: absolute
+                                  - left: 140px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                              card:
+                                - width: 310px
+                                - height: 50px
+                                - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)
+                              grid:
+                                - grid-template-areas: '"i" "n" "s"'
+                                - grid-template-columns: 1fr
+                                - grid-template-rows: 1fr min-content min-content
+                              img_cell:
+                                - align-self: start
+                                - text-align: start
+                              name:
+                                - justify-self: left
+                                - padding-left: 10px
+                                - font-weight: bold
+                                - text-transform: lovercase
+                                - align-self: null
+                              state:
+                                - justify-self: null
+                                - padding-left: 10px
+                                - color: '#b3b3b3'
+                              color_type: card
+                              layout: icon_name_state
+                              label: null
+                            custom_fields:
+                              topright:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.average_temperature_home
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/thermo1.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                              topleft:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.lumi_lumi_weather_6c0cdd01_humidity
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/humidity.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: blank-card
+                            name: false
+                            styles:
+                              card:
+                                - width: 27px
+                                - height: 10px
+                          - type: custom:button-card
+                            entity: 'null'
+                            name: Kylpyhuone
+                            show_state: true
+                            show_icon: true
+                            styles:
+                              custom_fields:
+                                graph:
+                                  - position: absolute
+                                  - left: 3px
+                                  - top: 120px
+                                  - width: 50px
+                                  - opacity: 75%
+                                topleft:
+                                  - position: absolute
+                                  - left: 220px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                                topright:
+                                  - position: absolute
+                                  - left: 140px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                              card:
+                                - width: 310px
+                                - height: 50px
+                                - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)
+                              grid:
+                                - grid-template-areas: '"i" "n" "s"'
+                                - grid-template-columns: 1fr
+                                - grid-template-rows: 1fr min-content min-content
+                              img_cell:
+                                - align-self: start
+                                - text-align: start
+                              name:
+                                - justify-self: left
+                                - padding-left: 10px
+                                - font-weight: bold
+                                - text-transform: lovercase
+                                - align-self: null
+                              state:
+                                - justify-self: null
+                                - padding-left: 10px
+                                - color: '#b3b3b3'
+                              color_type: card
+                              layout: icon_name_state
+                              label: null
+                            custom_fields:
+                              topright:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.average_temperature_home
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/thermo1.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                              topleft:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.lumi_lumi_weather_6c0cdd01_humidity
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/humidity.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: blank-card
+                            name: false
+                            styles:
+                              card:
+                                - width: 27px
+                                - height: 10px
+                          - type: custom:button-card
+                            entity: 'null'
+                            name: Leikkihuone
+                            show_state: true
+                            show_icon: true
+                            styles:
+                              custom_fields:
+                                graph:
+                                  - position: absolute
+                                  - left: 3px
+                                  - top: 120px
+                                  - width: 50px
+                                  - opacity: 75%
+                                topleft:
+                                  - position: absolute
+                                  - left: 220px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                                topright:
+                                  - position: absolute
+                                  - left: 140px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                              card:
+                                - width: 310px
+                                - height: 50px
+                                - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)
+                              grid:
+                                - grid-template-areas: '"i" "n" "s"'
+                                - grid-template-columns: 1fr
+                                - grid-template-rows: 1fr min-content min-content
+                              img_cell:
+                                - align-self: start
+                                - text-align: start
+                              name:
+                                - justify-self: left
+                                - padding-left: 10px
+                                - font-weight: bold
+                                - text-transform: lovercase
+                                - align-self: null
+                              state:
+                                - justify-self: null
+                                - padding-left: 10px
+                                - color: '#b3b3b3'
+                              color_type: card
+                              layout: icon_name_state
+                              label: null
+                            custom_fields:
+                              topright:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.average_temperature_home
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/thermo1.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                              topleft:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.lumi_lumi_weather_6c0cdd01_humidity
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/humidity.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: blank-card
+                            name: false
+                            styles:
+                              card:
+                                - width: 27px
+                                - height: 10px
+                          - type: custom:button-card
+                            entity: 'null'
+                            name: Makuuhuone
+                            show_state: true
+                            show_icon: true
+                            styles:
+                              custom_fields:
+                                graph:
+                                  - position: absolute
+                                  - left: 3px
+                                  - top: 120px
+                                  - width: 50px
+                                  - opacity: 75%
+                                topleft:
+                                  - position: absolute
+                                  - left: 220px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                                topright:
+                                  - position: absolute
+                                  - left: 140px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                              card:
+                                - width: 310px
+                                - height: 50px
+                                - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)
+                              grid:
+                                - grid-template-areas: '"i" "n" "s"'
+                                - grid-template-columns: 1fr
+                                - grid-template-rows: 1fr min-content min-content
+                              img_cell:
+                                - align-self: start
+                                - text-align: start
+                              name:
+                                - justify-self: left
+                                - padding-left: 10px
+                                - font-weight: bold
+                                - text-transform: lovercase
+                                - align-self: null
+                              state:
+                                - justify-self: null
+                                - padding-left: 10px
+                                - color: '#b3b3b3'
+                              color_type: card
+                              layout: icon_name_state
+                              label: null
+                            custom_fields:
+                              topright:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.average_temperature_home
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/thermo1.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                              topleft:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.lumi_lumi_weather_6c0cdd01_humidity
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/humidity.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: blank-card
+                            name: false
+                            styles:
+                              card:
+                                - width: 27px
+                                - height: 10px
+                          - type: custom:button-card
+                            entity: 'null'
+                            name: Lepohuone
+                            show_state: true
+                            show_icon: true
+                            styles:
+                              custom_fields:
+                                graph:
+                                  - position: absolute
+                                  - left: 3px
+                                  - top: 120px
+                                  - width: 50px
+                                  - opacity: 75%
+                                topleft:
+                                  - position: absolute
+                                  - left: 220px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                                topright:
+                                  - position: absolute
+                                  - left: 140px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                              card:
+                                - width: 310px
+                                - height: 50px
+                                - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)
+                              grid:
+                                - grid-template-areas: '"i" "n" "s"'
+                                - grid-template-columns: 1fr
+                                - grid-template-rows: 1fr min-content min-content
+                              img_cell:
+                                - align-self: start
+                                - text-align: start
+                              name:
+                                - justify-self: left
+                                - padding-left: 10px
+                                - font-weight: bold
+                                - text-transform: lovercase
+                                - align-self: null
+                              state:
+                                - justify-self: null
+                                - padding-left: 10px
+                                - color: '#b3b3b3'
+                              color_type: card
+                              layout: icon_name_state
+                              label: null
+                            custom_fields:
+                              topright:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.average_temperature_home
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/thermo1.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                              topleft:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.lumi_lumi_weather_6c0cdd01_humidity
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/humidity.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: blank-card
+                            name: false
+                            styles:
+                              card:
+                                - width: 27px
+                                - height: 10px
+                          - type: custom:button-card
+                            entity: 'null'
+                            name: Olohuone
+                            show_state: true
+                            show_icon: true
+                            styles:
+                              custom_fields:
+                                graph:
+                                  - position: absolute
+                                  - left: 3px
+                                  - top: 120px
+                                  - width: 50px
+                                  - opacity: 75%
+                                topleft:
+                                  - position: absolute
+                                  - left: 220px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                                topright:
+                                  - position: absolute
+                                  - left: 140px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                              card:
+                                - width: 310px
+                                - height: 50px
+                                - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)
+                              grid:
+                                - grid-template-areas: '"i" "n" "s"'
+                                - grid-template-columns: 1fr
+                                - grid-template-rows: 1fr min-content min-content
+                              img_cell:
+                                - align-self: start
+                                - text-align: start
+                              name:
+                                - justify-self: left
+                                - padding-left: 10px
+                                - font-weight: bold
+                                - text-transform: lovercase
+                                - align-self: null
+                              state:
+                                - justify-self: null
+                                - padding-left: 10px
+                                - color: '#b3b3b3'
+                              color_type: card
+                              layout: icon_name_state
+                              label: null
+                            custom_fields:
+                              topright:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.average_temperature_home
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/thermo1.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                              topleft:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.lumi_lumi_weather_6c0cdd01_humidity
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/humidity.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: blank-card
+                            name: false
+                            styles:
+                              card:
+                                - width: 27px
+                                - height: 10px
+                          - type: custom:button-card
+                            entity: 'null'
+                            name: Wc
+                            show_state: true
+                            show_icon: true
+                            styles:
+                              custom_fields:
+                                graph:
+                                  - position: absolute
+                                  - left: 3px
+                                  - top: 120px
+                                  - width: 50px
+                                  - opacity: 75%
+                                topleft:
+                                  - position: absolute
+                                  - left: 220px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                                topright:
+                                  - position: absolute
+                                  - left: 140px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                              card:
+                                - width: 310px
+                                - height: 50px
+                                - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)
+                              grid:
+                                - grid-template-areas: '"i" "n" "s"'
+                                - grid-template-columns: 1fr
+                                - grid-template-rows: 1fr min-content min-content
+                              img_cell:
+                                - align-self: start
+                                - text-align: start
+                              name:
+                                - justify-self: left
+                                - padding-left: 10px
+                                - font-weight: bold
+                                - text-transform: lovercase
+                                - align-self: null
+                              state:
+                                - justify-self: null
+                                - padding-left: 10px
+                                - color: '#b3b3b3'
+                              color_type: card
+                              layout: icon_name_state
+                              label: null
+                            custom_fields:
+                              topright:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.average_temperature_home
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/thermo1.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                              topleft:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.lumi_lumi_weather_6c0cdd01_humidity
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/humidity.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                device_id:
+                  - this
+              state:
+                - value: '0'
+                  styles:
+                    card:
+                      - filter: grayscale(100%)
+                      - opacity: 100%
+              show_state: true
+              show_name: false
+              show_label: false
+              show_icon: false
+              styles:
+                grid:
+                  - grid-template-areas: '"i s s"'
+                  - grid-template-columns: 1fr
+                  - grid-template-rows: 1fr min-content min-content
+                icon:
+                  - width: 20px
+                state:
+                  - justify-self: null
+                  - padding-left: 0px
+                  - font-weight: null
+                  - text-transform: lovercase
+                  - align-self: null
+                  - padding-bottom: null
+                  - font-size: 14px
+                  - color: '#b3b3b3'
+                card:
+                  - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+        - type: horizontal-stack
+          cards:
+            - type: custom:button-card
+              entity: sensor.lumi_lumi_weather_2ffa6104_humidity
+              entity_picture: /local/dashboard_images/lamp.png
+              show_entity_picture: false
+              tap_action:
+                action: fire-dom-event
+                browser_mod:
+                  command: popup
+                  title: 'null'
+                  hide_header: true
+                  auto_close: false
+                  large: false
+                  style:
+                    $: |
+                      .mdc-dialog {
+                        backdrop-filter: blur(10px);
+                        background: rgba(0,0,0,0.5);
+                      }  
+                      .mdc-dialog .mdc-dialog__container .mdc-dialog__surface {
+                        border-radius: 10px;
+                      }
+                    .: |
+                      :host {
+                        --mdc-theme-surface: rgba(245,245,245,0.7);
+                        --secondary-background-color: rgb(0,0,0,0.5);                  
+                       }
+                      :host .content {
+                        width: 10vw;
+                        height: 85vh;
+                       }                                   
+                  card:
+                    type: vertical-stack
+                    cards:
+                      - type: custom:button-card
+                        color_type: black-card
+                        name: false
+                        styles:
+                          card:
+                            - width: 0px
+                            - height: 11px
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: blank-card
+                            name: false
+                            styles:
+                              card:
+                                - width: 27px
+                                - height: 10px
+                          - type: custom:button-card
+                            entity: 'null'
+                            icon: 'null'
+                            name: Sisäympäristö
+                            styles:
+                              card:
+                                - width: 310px
+                                - height: 50px
+                                - box-shadow: none
+                              grid:
+                                - grid-template-areas: '"i" "n" "s"'
+                                - grid-template-columns: 1fr
+                                - grid-template-rows: 1fr min-content min-content
+                              img_cell:
+                                - align_self: start
+                                - text_align: start
+                              name:
+                                - justify-self: null
+                                - padding-left: 0px
+                                - font-weight: bold
+                                - text-transform: lovercase
+                                - align-self: null
+                                - color: '#323232'
+                              color_type: card
+                              color: 'null'
+                              layout: icon_state_name2nd
+                              show_state: true
+                              show_name: true
+                              show_label: true
+                              label: null
+                              state:
+                                - value: 'on'
+                                  styles:
+                                    card:
+                                      - box-shadow: none
+                                      - opacity: 70%
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: blank-card
+                            name: false
+                            styles:
+                              card:
+                                - width: 27px
+                                - height: 10px
+                          - type: custom:button-card
+                            entity: 'null'
+                            name: Keskiarvo
+                            show_state: true
+                            show_icon: true
+                            styles:
+                              custom_fields:
+                                graph:
+                                  - position: absolute
+                                  - left: 3px
+                                  - top: 120px
+                                  - width: 50px
+                                  - opacity: 75%
+                                topleft:
+                                  - position: absolute
+                                  - left: 220px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                                topright:
+                                  - position: absolute
+                                  - left: 140px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                              card:
+                                - width: 310px
+                                - height: 50px
+                                - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)
+                              grid:
+                                - grid-template-areas: '"i" "n" "s"'
+                                - grid-template-columns: 1fr
+                                - grid-template-rows: 1fr min-content min-content
+                              img_cell:
+                                - align-self: start
+                                - text-align: start
+                              name:
+                                - justify-self: left
+                                - padding-left: 10px
+                                - font-weight: bold
+                                - text-transform: lovercase
+                                - align-self: null
+                              state:
+                                - justify-self: null
+                                - padding-left: 10px
+                                - color: '#b3b3b3'
+                              color_type: card
+                              layout: icon_name_state
+                              label: null
+                            custom_fields:
+                              topright:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.average_temperature_home
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/thermo1.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                              topleft:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.lumi_lumi_weather_6c0cdd01_humidity
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/humidity.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: blank-card
+                            name: false
+                            styles:
+                              card:
+                                - width: 27px
+                                - height: 10px
+                          - type: custom:button-card
+                            entity: 'null'
+                            name: Eteinen
+                            show_state: true
+                            show_icon: true
+                            styles:
+                              custom_fields:
+                                graph:
+                                  - position: absolute
+                                  - left: 3px
+                                  - top: 120px
+                                  - width: 50px
+                                  - opacity: 75%
+                                topleft:
+                                  - position: absolute
+                                  - left: 220px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                                topright:
+                                  - position: absolute
+                                  - left: 140px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                              card:
+                                - width: 310px
+                                - height: 50px
+                                - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)
+                              grid:
+                                - grid-template-areas: '"i" "n" "s"'
+                                - grid-template-columns: 1fr
+                                - grid-template-rows: 1fr min-content min-content
+                              img_cell:
+                                - align-self: start
+                                - text-align: start
+                              name:
+                                - justify-self: left
+                                - padding-left: 10px
+                                - font-weight: bold
+                                - text-transform: lovercase
+                                - align-self: null
+                              state:
+                                - justify-self: null
+                                - padding-left: 10px
+                                - color: '#b3b3b3'
+                              color_type: card
+                              layout: icon_name_state
+                              label: null
+                            custom_fields:
+                              topright:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.average_temperature_home
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/thermo1.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                              topleft:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.lumi_lumi_weather_6c0cdd01_humidity
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/humidity.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: blank-card
+                            name: false
+                            styles:
+                              card:
+                                - width: 27px
+                                - height: 10px
+                          - type: custom:button-card
+                            entity: 'null'
+                            name: Keittiö
+                            show_state: true
+                            show_icon: true
+                            styles:
+                              custom_fields:
+                                graph:
+                                  - position: absolute
+                                  - left: 3px
+                                  - top: 120px
+                                  - width: 50px
+                                  - opacity: 75%
+                                topleft:
+                                  - position: absolute
+                                  - left: 220px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                                topright:
+                                  - position: absolute
+                                  - left: 140px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                              card:
+                                - width: 310px
+                                - height: 50px
+                                - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)
+                              grid:
+                                - grid-template-areas: '"i" "n" "s"'
+                                - grid-template-columns: 1fr
+                                - grid-template-rows: 1fr min-content min-content
+                              img_cell:
+                                - align-self: start
+                                - text-align: start
+                              name:
+                                - justify-self: left
+                                - padding-left: 10px
+                                - font-weight: bold
+                                - text-transform: lovercase
+                                - align-self: null
+                              state:
+                                - justify-self: null
+                                - padding-left: 10px
+                                - color: '#b3b3b3'
+                              color_type: card
+                              layout: icon_name_state
+                              label: null
+                            custom_fields:
+                              topright:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.average_temperature_home
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/thermo1.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                              topleft:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.lumi_lumi_weather_6c0cdd01_humidity
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/humidity.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: blank-card
+                            name: false
+                            styles:
+                              card:
+                                - width: 27px
+                                - height: 10px
+                          - type: custom:button-card
+                            entity: 'null'
+                            name: Kylpyhuone
+                            show_state: true
+                            show_icon: true
+                            styles:
+                              custom_fields:
+                                graph:
+                                  - position: absolute
+                                  - left: 3px
+                                  - top: 120px
+                                  - width: 50px
+                                  - opacity: 75%
+                                topleft:
+                                  - position: absolute
+                                  - left: 220px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                                topright:
+                                  - position: absolute
+                                  - left: 140px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                              card:
+                                - width: 310px
+                                - height: 50px
+                                - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)
+                              grid:
+                                - grid-template-areas: '"i" "n" "s"'
+                                - grid-template-columns: 1fr
+                                - grid-template-rows: 1fr min-content min-content
+                              img_cell:
+                                - align-self: start
+                                - text-align: start
+                              name:
+                                - justify-self: left
+                                - padding-left: 10px
+                                - font-weight: bold
+                                - text-transform: lovercase
+                                - align-self: null
+                              state:
+                                - justify-self: null
+                                - padding-left: 10px
+                                - color: '#b3b3b3'
+                              color_type: card
+                              layout: icon_name_state
+                              label: null
+                            custom_fields:
+                              topright:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.average_temperature_home
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/thermo1.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                              topleft:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.lumi_lumi_weather_6c0cdd01_humidity
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/humidity.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: blank-card
+                            name: false
+                            styles:
+                              card:
+                                - width: 27px
+                                - height: 10px
+                          - type: custom:button-card
+                            entity: 'null'
+                            name: Leikkihuone
+                            show_state: true
+                            show_icon: true
+                            styles:
+                              custom_fields:
+                                graph:
+                                  - position: absolute
+                                  - left: 3px
+                                  - top: 120px
+                                  - width: 50px
+                                  - opacity: 75%
+                                topleft:
+                                  - position: absolute
+                                  - left: 220px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                                topright:
+                                  - position: absolute
+                                  - left: 140px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                              card:
+                                - width: 310px
+                                - height: 50px
+                                - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)
+                              grid:
+                                - grid-template-areas: '"i" "n" "s"'
+                                - grid-template-columns: 1fr
+                                - grid-template-rows: 1fr min-content min-content
+                              img_cell:
+                                - align-self: start
+                                - text-align: start
+                              name:
+                                - justify-self: left
+                                - padding-left: 10px
+                                - font-weight: bold
+                                - text-transform: lovercase
+                                - align-self: null
+                              state:
+                                - justify-self: null
+                                - padding-left: 10px
+                                - color: '#b3b3b3'
+                              color_type: card
+                              layout: icon_name_state
+                              label: null
+                            custom_fields:
+                              topright:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.average_temperature_home
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/thermo1.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                              topleft:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.lumi_lumi_weather_6c0cdd01_humidity
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/humidity.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: blank-card
+                            name: false
+                            styles:
+                              card:
+                                - width: 27px
+                                - height: 10px
+                          - type: custom:button-card
+                            entity: 'null'
+                            name: Makuuhuone
+                            show_state: true
+                            show_icon: true
+                            styles:
+                              custom_fields:
+                                graph:
+                                  - position: absolute
+                                  - left: 3px
+                                  - top: 120px
+                                  - width: 50px
+                                  - opacity: 75%
+                                topleft:
+                                  - position: absolute
+                                  - left: 220px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                                topright:
+                                  - position: absolute
+                                  - left: 140px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                              card:
+                                - width: 310px
+                                - height: 50px
+                                - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)
+                              grid:
+                                - grid-template-areas: '"i" "n" "s"'
+                                - grid-template-columns: 1fr
+                                - grid-template-rows: 1fr min-content min-content
+                              img_cell:
+                                - align-self: start
+                                - text-align: start
+                              name:
+                                - justify-self: left
+                                - padding-left: 10px
+                                - font-weight: bold
+                                - text-transform: lovercase
+                                - align-self: null
+                              state:
+                                - justify-self: null
+                                - padding-left: 10px
+                                - color: '#b3b3b3'
+                              color_type: card
+                              layout: icon_name_state
+                              label: null
+                            custom_fields:
+                              topright:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.average_temperature_home
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/thermo1.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                              topleft:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.lumi_lumi_weather_6c0cdd01_humidity
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/humidity.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: blank-card
+                            name: false
+                            styles:
+                              card:
+                                - width: 27px
+                                - height: 10px
+                          - type: custom:button-card
+                            entity: 'null'
+                            name: Lepohuone
+                            show_state: true
+                            show_icon: true
+                            styles:
+                              custom_fields:
+                                graph:
+                                  - position: absolute
+                                  - left: 3px
+                                  - top: 120px
+                                  - width: 50px
+                                  - opacity: 75%
+                                topleft:
+                                  - position: absolute
+                                  - left: 220px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                                topright:
+                                  - position: absolute
+                                  - left: 140px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                              card:
+                                - width: 310px
+                                - height: 50px
+                                - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)
+                              grid:
+                                - grid-template-areas: '"i" "n" "s"'
+                                - grid-template-columns: 1fr
+                                - grid-template-rows: 1fr min-content min-content
+                              img_cell:
+                                - align-self: start
+                                - text-align: start
+                              name:
+                                - justify-self: left
+                                - padding-left: 10px
+                                - font-weight: bold
+                                - text-transform: lovercase
+                                - align-self: null
+                              state:
+                                - justify-self: null
+                                - padding-left: 10px
+                                - color: '#b3b3b3'
+                              color_type: card
+                              layout: icon_name_state
+                              label: null
+                            custom_fields:
+                              topright:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.average_temperature_home
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/thermo1.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                              topleft:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.lumi_lumi_weather_6c0cdd01_humidity
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/humidity.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: blank-card
+                            name: false
+                            styles:
+                              card:
+                                - width: 27px
+                                - height: 10px
+                          - type: custom:button-card
+                            entity: 'null'
+                            name: Olohuone
+                            show_state: true
+                            show_icon: true
+                            styles:
+                              custom_fields:
+                                graph:
+                                  - position: absolute
+                                  - left: 3px
+                                  - top: 120px
+                                  - width: 50px
+                                  - opacity: 75%
+                                topleft:
+                                  - position: absolute
+                                  - left: 220px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                                topright:
+                                  - position: absolute
+                                  - left: 140px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                              card:
+                                - width: 310px
+                                - height: 50px
+                                - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)
+                              grid:
+                                - grid-template-areas: '"i" "n" "s"'
+                                - grid-template-columns: 1fr
+                                - grid-template-rows: 1fr min-content min-content
+                              img_cell:
+                                - align-self: start
+                                - text-align: start
+                              name:
+                                - justify-self: left
+                                - padding-left: 10px
+                                - font-weight: bold
+                                - text-transform: lovercase
+                                - align-self: null
+                              state:
+                                - justify-self: null
+                                - padding-left: 10px
+                                - color: '#b3b3b3'
+                              color_type: card
+                              layout: icon_name_state
+                              label: null
+                            custom_fields:
+                              topright:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.average_temperature_home
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/thermo1.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                              topleft:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.lumi_lumi_weather_6c0cdd01_humidity
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/humidity.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: blank-card
+                            name: false
+                            styles:
+                              card:
+                                - width: 27px
+                                - height: 10px
+                          - type: custom:button-card
+                            entity: 'null'
+                            name: Wc
+                            show_state: true
+                            show_icon: true
+                            styles:
+                              custom_fields:
+                                graph:
+                                  - position: absolute
+                                  - left: 3px
+                                  - top: 120px
+                                  - width: 50px
+                                  - opacity: 75%
+                                topleft:
+                                  - position: absolute
+                                  - left: 220px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                                topright:
+                                  - position: absolute
+                                  - left: 140px
+                                  - top: 10px
+                                  - width: 130px
+                                  - height: 50px
+                                  - opacity: 100%
+                              card:
+                                - width: 310px
+                                - height: 50px
+                                - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)
+                              grid:
+                                - grid-template-areas: '"i" "n" "s"'
+                                - grid-template-columns: 1fr
+                                - grid-template-rows: 1fr min-content min-content
+                              img_cell:
+                                - align-self: start
+                                - text-align: start
+                              name:
+                                - justify-self: left
+                                - padding-left: 10px
+                                - font-weight: bold
+                                - text-transform: lovercase
+                                - align-self: null
+                              state:
+                                - justify-self: null
+                                - padding-left: 10px
+                                - color: '#b3b3b3'
+                              color_type: card
+                              layout: icon_name_state
+                              label: null
+                            custom_fields:
+                              topright:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.average_temperature_home
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/thermo1.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                              topleft:
+                                card:
+                                  type: custom:button-card
+                                  entity: sensor.lumi_lumi_weather_6c0cdd01_humidity
+                                  layout: icon_state
+                                  entity_picture: /local/dashboard_images/humidity.png
+                                  show_entity_picture: true
+                                  tap_action:
+                                    action: more-info
+                                  show_icon: true
+                                  show_state: true
+                                  show_name: false
+                                  show_label: false
+                                  styles:
+                                    icon:
+                                      - height: 25px
+                                      - width: 25px
+                                    card:
+                                      - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+                                    grid:
+                                      - grid-template-areas: '"i s s"'
+                                      - grid-template-columns: 1fr
+                                      - grid-template-rows: 1fr min-content min-content
+                                    state:
+                                      - font-size: 15px
+                                      - justify-self: null
+                                      - padding-right: 55px
+                                      - font-weight: null
+                                      - text-transform: lovercase
+                                      - align-self: null
+                                      - padding-bottom: null
+                                      - color: black
+                device_id:
+                  - this
+              device_id:
+                - this
+              state:
+                - value: '0'
+                  styles:
+                    card:
+                      - filter: grayscale(100%)
+                      - opacity: 100%
+              show_state: true
+              show_name: false
+              show_label: false
+              show_icon: false
+              styles:
+                grid:
+                  - grid-template-areas: '"i s s"'
+                  - grid-template-columns: 1fr
+                  - grid-template-rows: 1fr min-content min-content
+                icon:
+                  - width: 20px
+                state:
+                  - justify-self: null
+                  - padding-left: 0px
+                  - font-weight: null
+                  - text-transform: lovercase
+                  - align-self: null
+                  - padding-bottom: null
+                  - font-size: 14px
+                  - color: '#b3b3b3'
+                card:
+                  - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0)
+  topleft:
+    card:
+      type: custom:button-card
+      entity: sensor.bathroom_lights_on
+      entity_picture: /local/dashboard_images/lamp.png
+      show_entity_picture: true
+      tap_action:
+        action: none
+      state:
+        - value: '0'
+          styles:
+            card:
+              - filter: grayscale(100%)
+              - opacity: 100%
+      show_state: false
+      show_name: false
+      show_label: false
+      styles:
+        grid:
+          - grid-template-areas: '"i s s"'
+          - grid-template-columns: 1fr
+          - grid-template-rows: 1fr min-content min-content
+        icon:
+          - width: 20px
+        state:
+          - font-size: 10px
+          - justify-self: null
+          - padding-right: 12px
+          - font-weight: null
+          - text-transform: lovercase
+          - align-self: null
+          - padding-bottom: null
+tap_action:
+  action: fire-dom-event
+  browser_mod:
+    command: popup
+    title: 'null'
+    hide_header: true
+    auto_close: false
+    large: false
+    style:
+      $: |
+        .mdc-dialog {
+          backdrop-filter: blur(10px);
+          background: rgba(0,0,0,0.5);
+        }  
+        .mdc-dialog .mdc-dialog__container .mdc-dialog__surface {
+          border-radius: 10px;
+        }
+      .: |
+        :host {
+          --mdc-theme-surface: rgba(245,245,245,0.7);
+          --secondary-background-color: rgb(0,0,0,0.5);                  
+         }
+        :host .content {
+          width: 10vw;
+          height: 30vh;
+         }              
+         
+    card:
+      type: vertical-stack
+      cards:
+        - type: custom:button-card
+          color_type: black-card
+          name: false
+          styles:
+            card:
+              - width: 0px
+              - height: 11px
+        - type: horizontal-stack
+          cards:
+            - type: custom:button-card
+              color_type: blank-card
+              name: false
+              styles:
+                card:
+                  - width: 27px
+                  - height: 10px
+            - type: custom:button-card
+              entity: 'null'
+              icon: 'null'
+              name: Eteinen
+              styles:
+                card:
+                  - width: 310px
+                  - height: 50px
+                  - box-shadow: none
+                grid:
+                  - grid-template-areas: '"i" "n" "s"'
+                  - grid-template-columns: 1fr
+                  - grid-template-rows: 1fr min-content min-content
+                img_cell:
+                  - align_self: start
+                  - text_align: start
+                name:
+                  - justify-self: null
+                  - padding-left: 0px
+                  - font-weight: bold
+                  - text-transform: lovercase
+                  - align-self: null
+                  - color: '#323232'
+                color_type: card
+                color: 'null'
+                layout: icon_state_name2nd
+                show_state: true
+                show_name: true
+                show_label: true
+                label: null
+                state:
+                  - value: 'on'
+                    styles:
+                      card:
+                        - box-shadow: none
+                        - opacity: 70%
+        - type: horizontal-stack
+          cards:
+            - type: custom:button-card
+              color_type: blank-card
+              name: false
+              styles:
+                card:
+                  - width: 27px
+                  - height: 10px
+            - type: custom:button-card
+              entity: 'null'
+              name: Kattovalo
+              entity_picture: /local/lamp.png
+              show_entity_picture: true
+              icon: mdi:lightbulb
+              styles:
+                card:
+                  - width: 150px
+                  - height: 150px
+                  - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)
+                grid:
+                  - grid-template-areas: '"i" "n" "s"'
+                  - grid-template-columns: 1fr
+                  - grid-template-rows: 1fr min-content min-content
+                img_cell:
+                  - align-self: start
+                  - text-align: start
+                name:
+                  - justify-self: null
+                  - padding-left: 10px
+                  - font-weight: bold
+                  - text-transform: lovercase
+                  - align-self: null
+                  - color: '#323232'
+                state:
+                  - justify-self: null
+                  - padding-left: 10px
+                icon:
+                  - color: '#323232'
+              color_type: card
+              color: 'null'
+              layout: icon_state_name2nd
+              show_state: false
+              show_name: true
+              show_label: true
+              label: null
+              state:
+                - value: 'on'
+                  styles:
+                    card:
+                      - box-shadow: none
+                      - opacity: 100%
+                    icon:
+                      - color_type: null
+                      - color: '#fcbd00'
+                      - filter: null
+                - value: 'off'
+                  styles:
+                    card:
+                      - box-shadow: none
+                      - opacity: 70%
+                    icon:
+                      - color_type: null
+            - type: custom:button-card
+              entity: 'null'
+              name: Kattovalo
+              entity_picture: /local/lamp.png
+              show_entity_picture: true
+              icon: mdi:lightbulb
+              styles:
+                card:
+                  - width: 150px
+                  - height: 150px
+                  - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)
+                grid:
+                  - grid-template-areas: '"i" "n" "s"'
+                  - grid-template-columns: 1fr
+                  - grid-template-rows: 1fr min-content min-content
+                img_cell:
+                  - align-self: start
+                  - text-align: start
+                name:
+                  - justify-self: null
+                  - padding-left: 10px
+                  - font-weight: bold
+                  - text-transform: lovercase
+                  - align-self: null
+                  - color: '#323232'
+                state:
+                  - justify-self: null
+                  - padding-left: 10px
+                icon:
+                  - color: '#323232'
+              color_type: card
+              color: 'null'
+              layout: icon_state_name2nd
+              show_state: false
+              show_name: true
+              show_label: true
+              label: null
+              state:
+                - value: 'on'
+                  styles:
+                    card:
+                      - box-shadow: none
+                      - opacity: 100%
+                    icon:
+                      - color_type: null
+                      - color: '#fcbd00'
+                      - filter: null
+                - value: 'off'
+                  styles:
+                    card:
+                      - box-shadow: none
+                      - opacity: 70%
+                    icon:
+                      - color_type: null
+        - type: horizontal-stack
+          cards:
+            - type: custom:button-card
+              color_type: blank-card
+              name: false
+              styles:
+                card:
+                  - width: 27px
+                  - height: 10px
+            - type: custom:button-card
+              entity: null
+              name: Kattovalo
+              entity_picture: /local/lamp.png
+              show_entity_picture: true
+              icon: mdi:lightbulb
+              styles:
+                card:
+                  - width: 150px
+                  - height: 150px
+                  - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)
+                grid:
+                  - grid-template-areas: '"i" "n" "s"'
+                  - grid-template-columns: 1fr
+                  - grid-template-rows: 1fr min-content min-content
+                img_cell:
+                  - align-self: start
+                  - text-align: start
+                name:
+                  - justify-self: null
+                  - padding-left: 10px
+                  - font-weight: bold
+                  - text-transform: lovercase
+                  - align-self: null
+                  - color: '#323232'
+                state:
+                  - justify-self: null
+                  - padding-left: 10px
+              color_type: card
+              color: 'null'
+              layout: icon_state_name2nd
+              show_state: false
+              show_name: true
+              show_label: true
+              label: null
+              state:
+                - value: 'on'
+                  styles:
+                    card:
+                      - box-shadow: none
+                      - opacity: 70%
+                    icon:
+                      - color_type: null
+                      - color: '#fcbd00'
+                      - filter: null
+                - value: 'off'
+                  styles:
+                    card:
+                      - box-shadow: none
+                      - opacity: 70%
+                    icon:
+                      - color_type: null
+            - type: custom:button-card
+              entity: sensor.lumi_lumi_weather_9be8dc01_temperature
+              name: 'null'
+              entity_picture: /local/thermo.png
+              show_entity_picture: true
+              icon: 'null'
+              styles:
+                card:
+                  - width: 150px
+                  - height: 150px
+                  - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)
+                grid:
+                  - grid-template-areas: '"i" "n" "s"'
+                  - grid-template-columns: 1fr
+                  - grid-template-rows: 1fr min-content min-content
+                img_cell:
+                  - align-self: start
+                  - text-align: start
+                name:
+                  - justify-self: null
+                  - padding-left: 10px
+                  - font-weight: bold
+                  - text-transform: lovercase
+                  - align-self: null
+                  - color: '#323232'
+                state:
+                  - justify-self: null
+                  - padding-left: 10px
+                  - font-weight: bold
+                  - color: '#323232'
+              color_type: card
+              color: 'null'
+              layout: icon_state_name2nd
+              show_state: true
+              show_name: false
+              show_label: true
+              label: null
+              tap_action:
+                action: fire-dom-event
+                browser_mod:
+                  command: popup
+                  title: Eteisen lämpötila, ilmankosteus ja -paine
+                  hide_header: true
+                  auto_close: false
+                  large: false
+                  style:
+                    $: |
+                      .mdc-dialog {
+                        backdrop-filter: blur(10px);
+                        background: rgba(0,0,0,0.5);
+                      }  
+                      .mdc-dialog .mdc-dialog__container .mdc-dialog__surface {
+                        border-radius: 10px;
+                      }
+                    .: |
+                      :host {
+                        --mdc-theme-surface: rgba(245,245,245,0.7);
+                        --secondary-background-color: rgb(0,0,0,0.5);                  
+                       }
+                      :host .content {
+                        width: 47vw;
+                        height: 10vh;
+                       }              
+                       
+                  card:
+                    type: vertical-stack
+                    cards:
+                      - type: custom:button-card
+                        color_type: black-card
+                        name: false
+                        styles:
+                          card:
+                            - width: 0px
+                            - height: 11px
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: blank-card
+                            name: false
+                            styles:
+                              card:
+                                - width: 27px
+                                - height: 10px
+                          - type: custom:button-card
+                            entity: sensor.lumi_lumi_weather_9be8dc01_humidity
+                            name: Ilmankosteus
+                            entity_picture: /local/humidity.png
+                            show_entity_picture: true
+                            icon: hass:water-percent
+                            styles:
+                              card:
+                                - width: 150px
+                                - height: 150px
+                              grid:
+                                - grid-template-areas: '"i" "n" "s"'
+                                - grid-template-columns: 1fr
+                                - grid-template-rows: 1fr min-content min-content
+                              img_cell:
+                                - align-self: start
+                                - text-align: start
+                              name:
+                                - justify-self: null
+                                - padding-left: 10px
+                                - font-weight: bold
+                                - text-transform: lovercase
+                                - align-self: null
+                              state:
+                                - justify-self: null
+                                - padding-left: 10px
+                            color_type: card
+                            color: '#f5f5f5'
+                            layout: icon_state_name2nd
+                            show_state: true
+                            show_name: true
+                            show_label: true
+                            label: null
+                            state:
+                              - value: 'on'
+                                styles:
+                                  card:
+                                    - box-shadow: none
+                                    - opacity: 70%
+                                  icon:
+                                    - color_type: null
+                                    - color: '#fcbd00'
+                                    - filter: null
+                              - value: 'off'
+                                styles:
+                                  card:
+                                    - box-shadow: none
+                                    - opacity: 70%
+                                  icon:
+                                    - color_type: null
+                          - type: custom:button-card
+                            entity: sensor.lumi_lumi_weather_9be8dc01_pressure
+                            name: Ilmanpaine
+                            entity_picture: /local/barometer.png
+                            show_entity_picture: true
+                            icon: mdi:gauge
+                            styles:
+                              card:
+                                - width: 150px
+                                - height: 150px
+                              grid:
+                                - grid-template-areas: '"i" "n" "s"'
+                                - grid-template-columns: 1fr
+                                - grid-template-rows: 1fr min-content min-content
+                              img_cell:
+                                - align-self: start
+                                - text-align: start
+                              name:
+                                - justify-self: null
+                                - padding-left: 10px
+                                - font-weight: bold
+                                - text-transform: lovercase
+                                - align-self: null
+                              state:
+                                - justify-self: null
+                                - padding-left: 10px
+                            color_type: card
+                            color: '#f5f5f5'
+                            layout: icon_state_name2nd
+                            show_state: false
+                            show_name: true
+                            show_label: true
+                            label: null
+                            state:
+                              - value: 'on'
+                                styles:
+                                  card:
+                                    - box-shadow: none
+                                    - opacity: 70%
+                                  icon:
+                                    - color_type: null
+                                    - color: '#fcbd00'
+                                    - filter: null
+                              - value: 'off'
+                                styles:
+                                  card:
+                                    - box-shadow: none
+                                    - opacity: 70%
+                                  icon:
+                                    - color_type: null
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: blank-card
+                            name: false
+                            styles:
+                              card:
+                                - width: 27px
+                                - height: 10px
+                          - type: custom:button-card
+                            entity: sensor.lumi_lumi_weather_9be8dc01_power
+                            name: Virta
+                            entity_picture: /local/battery.png
+                            show_entity_picture: true
+                            icon: hass:battery
+                            styles:
+                              card:
+                                - width: 150px
+                                - height: 150px
+                              grid:
+                                - grid-template-areas: '"i" "n" "s"'
+                                - grid-template-columns: 1fr
+                                - grid-template-rows: 1fr min-content min-content
+                              img_cell:
+                                - align-self: start
+                                - text-align: start
+                              name:
+                                - justify-self: null
+                                - padding-left: 10px
+                                - font-weight: bold
+                                - text-transform: lovercase
+                                - align-self: null
+                              state:
+                                - justify-self: null
+                                - padding-left: 10px
+                            color_type: card
+                            color: '#f5f5f5'
+                            layout: icon_state_name2nd
+                            show_state: false
+                            show_name: true
+                            show_label: true
+                            label: null
+                            state:
+                              - value: 'on'
+                                styles:
+                                  card:
+                                    - box-shadow: none
+                                    - opacity: 70%
+                                  icon:
+                                    - color_type: null
+                                    - color: '#fcbd00'
+                                    - filter: null
+                              - value: 'off'
+                                styles:
+                                  card:
+                                    - box-shadow: none
+                                    - opacity: 70%
+                                  icon:
+                                    - color_type: null
+        - type: horizontal-stack
+          cards:
+            - type: custom:button-card
+              color_type: blank-card
+              name: false
+              styles:
+                card:
+                  - width: 27px
+                  - height: 10px
+            - type: custom:button-card
+              entity: 'null'
+              name: Avaimet
+              icon: mdi:key-variant
+              styles:
+                card:
+                  - width: 150px
+                  - height: 150px
+                  - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)
+                grid:
+                  - grid-template-areas: '"i" "n" "s"'
+                  - grid-template-columns: 1fr
+                  - grid-template-rows: 1fr min-content min-content
+                img_cell:
+                  - align-self: start
+                  - text-align: start
+                name:
+                  - justify-self: null
+                  - padding-left: 10px
+                  - font-weight: bold
+                  - text-transform: lovercase
+                  - align-self: null
+                  - color: '#323232'
+                state:
+                  - justify-self: null
+                  - padding-left: 10px
+              color_type: card
+              color: 'null'
+              layout: icon_state_name2nd
+              show_state: false
+              show_name: true
+              show_label: true
+              label: null
+              state:
+                - value: 'on'
+                  styles:
+                    card:
+                      - box-shadow: none
+                      - opacity: 70%
+                    icon:
+                      - color_type: null
+                      - color: '#fcbd00'
+                      - filter: null
+                - value: 'off'
+                  styles:
+                    card:
+                      - box-shadow: none
+                      - opacity: 70%
+                    icon:
+                      - color_type: null
+              tap_action:
+                action: fire-dom-event
+                browser_mod:
+                  command: popup
+                  title: 'null'
+                  hide_header: true
+                  auto_close: false
+                  large: false
+                  style:
+                    $: |
+                      .mdc-dialog {
+                        backdrop-filter: blur(10px);
+                        background: rgba(0,0,0,0.5);
+                      }  
+                      .mdc-dialog .mdc-dialog__container .mdc-dialog__surface {
+                        border-radius: 10px;
+                      }
+                    .: |
+                      :host {
+                        --mdc-theme-surface: rgba(245,245,245,0.7);
+                        --secondary-background-color: rgb(0,0,0,0.5);                  
+                       }
+                      :host .content {
+                        width: 47vw;
+                        height: 10vh;
+                       }              
+                       
+                  card:
+                    type: vertical-stack
+                    cards:
+                      - type: custom:button-card
+                        color_type: black-card
+                        name: false
+                        styles:
+                          card:
+                            - width: 0px
+                            - height: 11px
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: blank-card
+                            name: false
+                            styles:
+                              card:
+                                - width: 27px
+                                - height: 10px
+                          - type: custom:button-card
+                            entity: 'null'
+                            name: Antin avaimet
+                            icon: mdi:key-variant
+                            tap_action:
+                              action: call-service
+                              service: rest_command.assistant_relay
+                              service_data:
+                                command: Find my Home Key
+                            styles:
+                              card:
+                                - width: 150px
+                                - height: 150px
+                              grid:
+                                - grid-template-areas: '"i" "n" "s"'
+                                - grid-template-columns: 1fr
+                                - grid-template-rows: 1fr min-content min-content
+                              img_cell:
+                                - align-self: start
+                                - text-align: start
+                              name:
+                                - justify-self: null
+                                - padding-left: 10px
+                                - font-weight: bold
+                                - text-transform: lovercase
+                                - align-self: null
+                              state:
+                                - justify-self: null
+                                - padding-left: 10px
+                            color_type: card
+                            color: '#f5f5f5'
+                            layout: icon_state_name2nd
+                            show_state: true
+                            show_name: true
+                            show_label: true
+                            label: null
+                            state:
+                              - value: 'on'
+                                styles:
+                                  card:
+                                    - box-shadow: none
+                                    - opacity: 70%
+                                  icon:
+                                    - color_type: null
+                                    - color: '#fcbd00'
+                                    - filter: null
+                              - value: 'off'
+                                styles:
+                                  card:
+                                    - box-shadow: none
+                                    - opacity: 70%
+                                  icon:
+                                    - color_type: null
+                          - type: custom:button-card
+                            entity: 'null'
+                            name: Tinjan avaimet
+                            icon: mdi:key-variant
+                            tap_action:
+                              action: call-service
+                              service: rest_command.assistant_relay
+                              service_data:
+                                command: Find my Tinja Key
+                            styles:
+                              card:
+                                - width: 150px
+                                - height: 150px
+                              grid:
+                                - grid-template-areas: '"i" "n" "s"'
+                                - grid-template-columns: 1fr
+                                - grid-template-rows: 1fr min-content min-content
+                              img_cell:
+                                - align-self: start
+                                - text-align: start
+                              name:
+                                - justify-self: null
+                                - padding-left: 10px
+                                - font-weight: bold
+                                - text-transform: lovercase
+                                - align-self: null
+                              state:
+                                - justify-self: null
+                                - padding-left: 10px
+                            color_type: card
+                            color: '#f5f5f5'
+                            layout: icon_state_name2nd
+                            show_state: false
+                            show_name: true
+                            show_label: true
+                            label: null
+                            state:
+                              - value: 'on'
+                                styles:
+                                  card:
+                                    - box-shadow: none
+                                    - opacity: 70%
+                                  icon:
+                                    - color_type: null
+                                    - color: '#fcbd00'
+                                    - filter: null
+                              - value: 'off'
+                                styles:
+                                  card:
+                                    - box-shadow: none
+                                    - opacity: 70%
+                                  icon:
+                                    - color_type: null
+            - type: custom:button-card
+              entity: 'null'
+              name: Reititin
+              icon: mdi:router-wireless
+              styles:
+                card:
+                  - width: 150px
+                  - height: 150px
+                  - box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)
+                grid:
+                  - grid-template-areas: '"i" "n" "s"'
+                  - grid-template-columns: 1fr
+                  - grid-template-rows: 1fr min-content min-content
+                img_cell:
+                  - align-self: start
+                  - text-align: start
+                name:
+                  - justify-self: null
+                  - padding-left: 10px
+                  - font-weight: bold
+                  - text-transform: lovercase
+                  - align-self: null
+                state:
+                  - justify-self: null
+                  - padding-left: 10px
+              color_type: card
+              color: '#f5f5f5'
+              layout: icon_state_name2nd
+              show_state: false
+              show_name: true
+              show_label: true
+              label: null
+              state:
+                - value: 'on'
+                  styles:
+                    card:
+                      - box-shadow: none
+                      - opacity: 70%
+                    icon:
+                      - color_type: null
+                      - color: '#fcbd00'
+                      - filter: null
+                - value: 'off'
+                  styles:
+                    card:
+                      - box-shadow: none
+                      - opacity: 70%
+                    icon:
+                      - color_type: null
+              tap_action:
+                action: url
+                url_path: >-
+                  intent:#Intent;component=com.tplink.tpm5/com.amazon.identity.auth.device.workflow.WorkflowActivity;end
+          device_id:
+            - this
+        - type: horizontal-stack
+          cards:
+            - type: custom:button-card
+              color_type: blank-card
+              name: false
+              styles:
+                card:
+                  - width: 27px
+                  - height: 10px
+      device_id:
+        - this
